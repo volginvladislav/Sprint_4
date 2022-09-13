@@ -61,12 +61,12 @@ public class HomePage extends BasePage{
     // Методы для тестового сценария 1 (Проверка выпадающего списка в разделе «Вопросы о важном»)
     // Метод ожидания наличия всплывающего окна куки (при наличии - нажимаем)
     public void clickCookieButton() {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfElementLocated(cookieButton)).click();
+        new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(cookieButton)).click();
     }
 
     // Метод ожидания кликабильности списка «Вопросы о важном»
     public void waitForLoadFaqQuestions() {
-        new WebDriverWait(driver, 60)
+        new WebDriverWait(driver, 40)
                 .until(ExpectedConditions.elementToBeClickable(faqQuestions));
     }
 
@@ -76,135 +76,118 @@ public class HomePage extends BasePage{
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
-    // Метод кликает по вопросу №1  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber1() {
-        driver.findElement(faqQuestionNumber1).click();
-    }
-
-    // Метод кликает по вопросу №2  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber2() {
-        driver.findElement(faqQuestionNumber2).click();
-    }
-
-    // Метод кликает по вопросу №3  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber3() {
-        driver.findElement(faqQuestionNumber3).click();
-    }
-
-    // Метод кликает по вопросу №4  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber4() {
-        driver.findElement(faqQuestionNumber4).click();
-    }
-
-    // Метод кликает по вопросу №5  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber5() {
-        driver.findElement(faqQuestionNumber5).click();
-    }
-
-    // Метод кликает по вопросу №6  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber6() {
-        driver.findElement(faqQuestionNumber6).click();
-    }
-
-    // Метод кликает по вопросу №7  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber7() {
-        driver.findElement(faqQuestionNumber7).click();
-    }
-
-    // Метод кликает по вопросу №8  из выпадающего списка «Вопросы о важном»
-    public void clickFaqQuestionNumber8() {
-        driver.findElement(faqQuestionNumber8).click();
+    //Метода клика по заданному вопросу из списка «Вопросы о важном»
+    public void clickFaqQuestionNumber(String i) {
+        if (i == "1") {
+            driver.findElement(faqQuestionNumber1).click();
+        } else if (i == "2") {
+            driver.findElement(faqQuestionNumber2).click();
+        } else if (i == "3") {
+            driver.findElement(faqQuestionNumber3).click();
+        } else if (i == "4") {
+            driver.findElement(faqQuestionNumber4).click();
+        } else if (i == "5") {
+            driver.findElement(faqQuestionNumber5).click();
+        } else if (i == "6") {
+            driver.findElement(faqQuestionNumber6).click();
+        } else if (i == "7") {
+            driver.findElement(faqQuestionNumber7).click();
+        } else if (i == "8") {
+            driver.findElement(faqQuestionNumber8).click();
+        }
     }
 
     // Метод ожидания текста ответа после клика по вопросу «Вопросы о важном»
-    public void waitForLoadAnswerText(int i) {
+    public void waitForLoadAnswerText(String i) {
         By element = null;
-        if(i==1) {
+        if(i == "1") {
             element = faqAnswerNumber1;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==2) {
+        } else if(i == "2") {
             element = faqAnswerNumber2;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==3) {
+        } else if(i == "3") {
             element = faqAnswerNumber3;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==4) {
+        } else if(i == "4") {
             element = faqAnswerNumber4;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==5) {
+        } else if(i == "5") {
             element = faqAnswerNumber5;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==6) {
+        } else if(i == "6") {
             element = faqAnswerNumber6;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==7) {
+        } else if(i == "7") {
             element = faqAnswerNumber7;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
-        } else if(i==8) {
+        } else if(i == "8") {
             element = faqAnswerNumber8;
             new WebDriverWait(driver, 5)
                     .until(ExpectedConditions.visibilityOfElementLocated(element));
         }
-
     }
 
     // Метод получает текст ответа при нажатии на вопросы выпадающего списка «Вопросы о важном»
-    public String getTextFaqAnswer(int i) {
+    public String getTextFaqAnswer(String i) {
         String text = null;
-        if (i == 1) {
+        if (i == "1") {
             text = driver.findElement(faqAnswerNumber1).getText();
-        } else if (i == 2) {
+        } else if (i == "2") {
             text = driver.findElement(faqAnswerNumber2).getText();
-        } else if (i == 3) {
+        } else if (i == "3") {
             text = driver.findElement(faqAnswerNumber3).getText();
-        } else if (i == 4) {
+        } else if (i == "4") {
             text = driver.findElement(faqAnswerNumber4).getText();
-        } else if (i == 5) {
+        } else if (i == "5") {
             text = driver.findElement(faqAnswerNumber5).getText();
-        } else if (i == 6) {
+        } else if (i == "6") {
             text = driver.findElement(faqAnswerNumber6).getText();
-        } else if (i == 7) {
+        } else if (i == "7") {
             text = driver.findElement(faqAnswerNumber7).getText();
-        } else if (i == 8) {
+        } else if (i == "8") {
             text = driver.findElement(faqAnswerNumber8).getText();
         }
         return text;
     }
 
     // Методы для тестового сценария 2 (Заказ самоката)
-    // Метод ожидания кликабильности кнопки «Заказать», расположенной в правом верхнем углу страницы
-    public void waitForLoadOrderButtonInUpRightPage() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.elementToBeClickable(orderButtonUpRightPage));
+    // Метод ожидания кликабильности кнопки «Заказать»
+    public void waitForLoadOrderButton(String i) {
+        if(i == "up") {
+            new WebDriverWait(driver, 10)
+                    .until(ExpectedConditions.elementToBeClickable(orderButtonUpRightPage));
+        } else if(i == "down") {
+            new WebDriverWait(driver, 10)
+                    .until(ExpectedConditions.elementToBeClickable(orderButtonAtTheBottomMiddlePage));
+        }
     }
 
-    // Метода клика по кнопке «Заказать», расположенной в правом верхнем углу главной страницы
-    public void clickOrderButtonInUpRightPage() {
-        driver.findElement(orderButtonUpRightPage).click();
+    // Метод скроллинга страницы до кнопки «Заказать»
+    public void scrollToButton(String i) {
+        if(i == "down") {
+            WebElement element = driver.findElement(orderButtonAtTheBottomMiddlePage);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        } else if(i == "up") {
+            WebElement element = driver.findElement(orderButtonUpRightPage);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        }
     }
 
-    // Метод скроллинга стринцы до кнопки, «Заказать», расположенной по-середине снизу главной страницы
-    public void scrollToButtonAtTheBottomMiddlePage() {
-        WebElement element = driver.findElement(orderButtonAtTheBottomMiddlePage);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-    }
-
-    // Метод ожидания кликабильности кнопки «Заказать», расположенной по-середине снизу главной страницы
-    public void waitForLoadOrderButtonAtTheBottomMiddlePage() {
-        new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.elementToBeClickable(orderButtonAtTheBottomMiddlePage));
-    }
-
-    // Метода клика по кнопке «Заказать», расположенной по-середине снизу главной страницы
-    public void clickOrderButtonAtTheBottomMiddlePage() {
-        driver.findElement(orderButtonAtTheBottomMiddlePage).click();
+    // Метода нажатия на кнопку «Заказать»
+    public void clickOrderButton(String i) {
+        if(i == "down") {
+            driver.findElement(orderButtonAtTheBottomMiddlePage).click();
+        } else if(i == "up") {
+            driver.findElement(orderButtonUpRightPage).click();
+        }
     }
 }
 

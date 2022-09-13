@@ -22,22 +22,56 @@ public class TestHomePageFaq {
     private final String FAQ_ANSWER_TEXT_NUMBER6 = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
     private final String FAQ_ANSWER_TEXT_NUMBER7 = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
     private final String FAQ_ANSWER_TEXT_NUMBER8 = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
-
+    private String numberOfQuestion;
+    // Переменная, в которой будем хранить правильный ответ для сравнения с актуальным ответом
+    private String correctAnswer;
     WebDriver driver;
 
-    public TestHomePageFaq(String choosedDriver) {
+    public TestHomePageFaq(String choosedDriver, String numberOfQuestion) {
         if (choosedDriver.equals("Chrome")) {
             driver = new ChromeDriver();
         } else if (choosedDriver.equals("FireFox")) {
             driver = new FirefoxDriver();
+        }
+        this.numberOfQuestion = numberOfQuestion;
+        if (numberOfQuestion =="1"){
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER1;
+        } else if (numberOfQuestion =="2") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER2;
+        }else if (numberOfQuestion =="3") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER3;
+        }else if (numberOfQuestion =="4") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER4;
+        }else if (numberOfQuestion =="5") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER5;
+        }else if (numberOfQuestion =="6") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER6;
+        }else if (numberOfQuestion =="7") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER7;
+        }else if (numberOfQuestion =="8") {
+            correctAnswer = FAQ_ANSWER_TEXT_NUMBER8;
         }
     }
 
     @Parameterized.Parameters
     public static Object[][] getData() {
         return new Object[][]{
-                {"Chrome"},
-                {"FireFox"},
+                {"Chrome", "1"},
+                {"Chrome", "2"},
+                {"Chrome", "3"},
+                {"Chrome", "4"},
+                {"Chrome", "5"},
+                {"Chrome", "6"},
+                {"Chrome", "7"},
+                {"Chrome", "8"},
+                {"FireFox", "1"},
+                {"FireFox", "2"},
+                {"FireFox", "3"},
+                {"FireFox", "4"},
+                {"FireFox", "5"},
+                {"FireFox", "6"},
+                {"FireFox", "7"},
+                {"FireFox", "8"},
         };
     }
 
@@ -46,9 +80,8 @@ public class TestHomePageFaq {
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
-    // Тест ответа на вопрос №1
     @Test
-    public void matchedAnswerTofaqQuestionNumber1() {
+    public void matchedAnswerTofaqQuestion() {
         HomePage objHomePage = new HomePage(driver);
         // Ожидание куки, клик, если они есть
         objHomePage.clickCookieButton();
@@ -57,137 +90,11 @@ public class TestHomePageFaq {
         // Скроллинг до списка вопросов
         objHomePage.scrollToFaqQuestion();
         // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber1();
+        objHomePage.clickFaqQuestionNumber(numberOfQuestion);
         // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(1);
+        objHomePage.waitForLoadAnswerText(numberOfQuestion);
         // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №1", FAQ_ANSWER_TEXT_NUMBER1, objHomePage.getTextFaqAnswer(1));
-    }
-
-    // Тест ответа на вопрос №2
-    @Test
-    public void matchedAnswerToFaqQuestionNumber2() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber2();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(2);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №2", FAQ_ANSWER_TEXT_NUMBER2, objHomePage.getTextFaqAnswer(2));
-    }
-
-    // Тест ответа на вопрос №3
-    @Test
-    public void matchedAnswerToFaqQuestionNumber3() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber3();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(3);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №3", FAQ_ANSWER_TEXT_NUMBER3, objHomePage.getTextFaqAnswer(3));
-    }
-
-    // Тест ответа на вопрос №4
-    @Test
-    public void matchedAnswerToFaqQuestionNumber4() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber4();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(4);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №4", FAQ_ANSWER_TEXT_NUMBER4, objHomePage.getTextFaqAnswer(4));
-    }
-
-    // Тест ответа на вопрос №5
-    @Test
-    public void matchedAnswerToFaqQuestionNumber5() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber5();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(5);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №5", FAQ_ANSWER_TEXT_NUMBER5, objHomePage.getTextFaqAnswer(5));
-    }
-
-    // Тест ответа на вопрос №6
-    @Test
-    public void matchedAnswerToFaqQuestionNumber6() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber6();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(6);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №6", FAQ_ANSWER_TEXT_NUMBER6, objHomePage.getTextFaqAnswer(6));
-    }
-
-    // Тест ответа на вопрос №7
-    @Test
-    public void matchedAnswerToFaqQuestionNumber7() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber7();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(7);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №7", FAQ_ANSWER_TEXT_NUMBER7, objHomePage.getTextFaqAnswer(7));
-    }
-
-    // Тест ответа на вопрос №8
-    @Test
-    public void matchedAnswerToFaqQuestionNumber8() {
-        HomePage objHomePage = new HomePage(driver);
-        // Ожидание куки, клик, если они есть
-        objHomePage.clickCookieButton();
-        // Ожидание списка вопросов
-        objHomePage.waitForLoadFaqQuestions();
-        // Скроллинг до списка вопросов
-        objHomePage.scrollToFaqQuestion();
-        // Клик по вопросу
-        objHomePage.clickFaqQuestionNumber8();
-        // Ожидание ответа
-        objHomePage.waitForLoadAnswerText(8);
-        // Проверка на совпадение текста ответа
-        assertEquals("Несовпадение текста ответа на вопрос №8", FAQ_ANSWER_TEXT_NUMBER8, objHomePage.getTextFaqAnswer(8));
+        assertEquals("Неверный текст ответа на вопрос", correctAnswer, objHomePage.getTextFaqAnswer(numberOfQuestion));
     }
 
     @After
